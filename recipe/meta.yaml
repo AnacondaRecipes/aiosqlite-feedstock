@@ -1,5 +1,5 @@
 {% set name = "aiosqlite" %}
-{% set version = "0.22.0" %}
+{% set version = "0.22.1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 7e9e52d72b319fcdeac727668975056c49720c995176dc57370935e5ba162bb9
+  sha256: 043e0bd78d32888c0a9ca90fc788b38796843360c855a7262a532813133a0650
 
 build:
   number: 0
@@ -21,15 +21,17 @@ requirements:
     - flit-core >=3.8,<4
   run:
     - python
-    - typing_extensions >=4.0
 
 test:
+  source_files:
+    - aiosqlite/tests
   imports:
     - aiosqlite
   requires:
     - pip
   commands:
     - pip check
+    - python -m unittest -v aiosqlite/tests/smoke.py
 
 about:
   home: https://github.com/omnilib/aiosqlite
@@ -40,7 +42,7 @@ about:
   description: |
     AsyncIO bridge to the standard sqlite3 module for Python 3.5+.
   dev_url: https://github.com/omnilib/aiosqlite
-  doc_url: https://aiosqlite.omnilib.dev/
+  doc_url: https://aiosqlite.omnilib.dev
 
 extra:
   recipe-maintainers:
